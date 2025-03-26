@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca de Câmeras</title>
+    <link rel="stylesheet" href="stilo.css">
+    <script defer src="script.js"></script>
+    
+</head>
+<body>
+    <h1>Globo Cameras</h1>
+    <div class="infocamera">
+    <h3 class="nomecamera">Nome Camera</h3>
+    <h3 class="ipcamera">Ip da Camera</h3>
+    </div>
+    <div id="video">
+        <img id="camera-stream" width="480" height="270" src="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">
+        <div id="log-container">
+            <h3>Log</h3>
+            <div id="log-content"></div>
+        </div>
+    </div>
+
+    <br></br>
+
+    <div class="camera-buttons">
+        <button class="camera-button" onclick="abrirCamera(1)">Rua da Aurora</button>
+        <button class="camera-button" onclick="abrirCamera(2)">Boa Vista</button>
+        <button class="camera-button" onclick="abrirCamera(3)">Conselheiro Aquiar</button>
+        <button class="camera-button" onclick="abrirCamera(4)">BR 101</button>
+        <button class="camera-button" onclick="abrirCamera(5)">Praça 13 de Maio</button>
+    </div>
+
+    <script defer src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* Definindo o estilo global da página */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Título da página */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container principal para o vídeo e informações da câmera */
+#video {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Estilo para o container que envolve o vídeo e informações */
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para o log */
+/* Estilo para o log */
+#log-container {
+    border: 1px solid #000;
+    padding: 10px;
+    max-height: 200px; /* Limita a altura máxima do log */
+    width: 350px; /* Define uma largura fixa */
+    overflow-y: auto; /* Faz a rolagem quando ultrapassar a altura */
+    position: relative; /* Necessário para o título fixo */
+}
+
+/* Estilo para o título do log */
+#log-container h3 {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 5px;
+    margin: 0;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    z-index: 1;
+}
+
+
+
+/* Estilo para as informações da câmera */
+.infocamera {
+    color: #4CAF50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Nome da câmera e IP */
+.nomecamera, .ipcamera {
+    margin: 5px 0;
+}
+
+/* Câmera */
+#camera-stream {
+    border: 2px solid #000;
+    border-radius: 8px;
+    width: 480px;
+    height: 270px;
+}
+
+/* Botões abaixo da câmera */
+.camera-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Estilo dos botões */
+.camera-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.camera-button:hover {
+    background-color: #45a049;
+}

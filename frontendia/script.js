@@ -29,7 +29,7 @@ function obterUrlCamera(rua) {
 function reconhecerFala() {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "pt-BR"; // Configura para português
-    recognition.continuous = true; // Mantém o reconhecimento contínuo
+    recognition.continuous = false; // Mantém o reconhecimento contínuo se caso o microfone para de ser usado trocar para True
     recognition.interimResults = false; // Apenas resultados finais
     recognition.start(); // Inicia o reconhecimento de fala
 
@@ -69,3 +69,50 @@ function reconhecerFala() {
 
 // Inicia o reconhecimento de fala assim que a página carregar
 reconhecerFala();
+
+//começa aqui a previsualixação das cameras dentro dos botções
+
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".camera-button");
+    const preview = document.getElementById("preview");
+    const display = document.getElementById("camera-display");
+    const cameraStream = document.getElementById("camera-stream");
+
+    buttons.forEach(button => {
+        button.addEventListener("mouseover", function(event) {
+            const cameraUrl = this.getAttribute("data-camera");
+            showPreview(cameraUrl, event);
+        });
+
+        button.addEventListener("mousemove", function(event) {
+            movePreview(event);
+        });
+
+        button.addEventListener("mouseout", hidePreview);
+
+        button.addEventListener("click", function() {
+            const cameraUrl = this.getAttribute("data-camera");
+            abrirCamera(cameraUrl);
+        });
+    });
+
+    function showPreview(cameraUrl, event) {
+        preview.style.display = "block";
+        preview.innerHTML = `<img src="${cameraUrl}" alt="Prévia da câmera">`;
+        movePreview(event);
+    }
+
+    function movePreview(event) {
+        preview.style.top = event.clientY + 15 + "px";
+        preview.style.left = event.clientX + 15 + "px";
+    }
+
+    function hidePreview() {
+        preview.style.display = "none";
+    }
+
+    function abrirCamera(cameraUrl) {
+        cameraStream.src = cameraUrl;  // Atualiza a URL da imagem da câmera
+        display.style.display = "block"; // Exibe a câmera ao vivo
+    }
+});

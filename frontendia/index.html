@@ -11,10 +11,26 @@
 <body>
     <h1>Globo Cameras</h1>
     <div class="infocamera">
-    <h3 class="nomecamera">Nome Camera</h3>
-    <h3 class="ipcamera">Ip da Camera</h3>
+    <h3 class="nomecamera">Rua Aurora</h3>
+    <h3 class="ipcamera">192.184.78.184</h3>
     </div>
+
     <div id="video">
+
+        
+        
+    <div class="camera-buttons">
+        <h3 class="camerasbotons">Cameras</h3>
+        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Rua da Aurora</button>
+        <button class="camera-button" data-camera="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km61&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Boa Vista</button>
+        <button class="camera-button" data-camera="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Conselheiro Aquiar</button>
+        <button class="camera-button" data-camera="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">BR 101</button>
+        <button class="camera-button" data-camera="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Praça 13 de Maio</button>
+    </div>
+   
+    <div id="preview" class="preview"></div>
+    <div id="camera-display" class="camera-display"></div>
+
         <img id="camera-stream" width="480" height="270" src="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">
         <div id="log-container">
             <h3>Log</h3>
@@ -24,13 +40,6 @@
 
     <br></br>
 
-    <div class="camera-buttons">
-        <button class="camera-button" onclick="abrirCamera(1)">Rua da Aurora</button>
-        <button class="camera-button" onclick="abrirCamera(2)">Boa Vista</button>
-        <button class="camera-button" onclick="abrirCamera(3)">Conselheiro Aquiar</button>
-        <button class="camera-button" onclick="abrirCamera(4)">BR 101</button>
-        <button class="camera-button" onclick="abrirCamera(5)">Praça 13 de Maio</button>
-    </div>
 
     <script defer src="scripts.js"></script>
 </body>

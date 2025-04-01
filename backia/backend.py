@@ -7,10 +7,10 @@ CORS(app)
 
 # Mapeamento de ruas para URLs das câmeras
 cameras = {
-    "rua aurora": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "aurora": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km61&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "avenida conde da boa vista": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "conde da boa vista": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892"
+    "rua aurora": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km07&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "câmera 1": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km07&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "câmera 2": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km51&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "conde da boa vista": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km51&AuthUser=appconcer&AuthPass=CoNcrRdi13892"
 }
 
 @app.route('/obter_camera/<rua>', methods=['GET'])

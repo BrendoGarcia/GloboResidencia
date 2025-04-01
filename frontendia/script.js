@@ -40,9 +40,9 @@ function reconhecerFala() {
         // Lista de palavras-chave (nomes de câmeras) que podem ser reconhecidas
         const camerasDisponiveis = [
            "rua aurora",
-           "aurora",
+           "câmera 1",
            "avenida conde da boa vista",
-           "conde da boa vista"
+           "câmera 2"
         ];
 
         // Verifica se o comando corresponde a alguma das câmeras disponíveis
@@ -55,12 +55,12 @@ function reconhecerFala() {
     };
 
     recognition.onerror = function(event) {
-        console.error("Erro no reconhecimento de fala:", event.error);
+        console.error("Esperando comando de voz:", event.error);
     };
 
     recognition.onend = function() {
         // Reinicia o reconhecimento assim que ele parar (sempre ativa)
-        console.log("Reconhecimento de fala parado, reiniciando...");
+        console.log("Aguardando Comando de Voz...");
         reconhecerFala(); // Reinicia o reconhecimento de fala
     };
 }
@@ -98,21 +98,144 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function showPreview(cameraUrl, event) {
         preview.style.display = "block";
+        preview.style.borderRadius = "8px";
         preview.innerHTML = `<img src="${cameraUrl}" alt="Prévia da câmera">`;
         movePreview(event);
     }
 
     function movePreview(event) {
+        preview.style.borderRadius = "8px"
         preview.style.top = event.clientY + 15 + "px";
         preview.style.left = event.clientX + 15 + "px";
     }
 
     function hidePreview() {
+        preview.style.borderRadius = "8px"
         preview.style.display = "none";
     }
 
     function abrirCamera(cameraUrl) {
+        preview.style.borderRadius = "8px"
         cameraStream.src = cameraUrl;  // Atualiza a URL da imagem da câmera
         display.style.display = "block"; // Exibe a câmera ao vivo
     }
 });
+
+//Agendamentos
+
+let scheduleList = JSON.parse(localStorage.getItem("scheduleList")) || [];
+
+        function agendarCamera() {
+            const cameraUrl = document.getElementById("camera-select").value;
+            const horario = document.getElementById("schedule-time").value;
+
+            if (!horario) {
+                alert("Por favor, escolha um horário.");
+                return;
+            }
+
+            scheduleList.push({ cameraUrl, horario });
+            salvarAgendamentos();
+            atualizarLista();
+        }
+
+        function salvarAgendamentos() {
+            localStorage.setItem("scheduleList", JSON.stringify(scheduleList));
+        }
+
+        function atualizarLista() {
+            const listElement = document.getElementById("schedule-list");
+            listElement.innerHTML = "";
+
+            scheduleList.forEach((item, index) => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `Câmera: ${item.cameraUrl.split("camera=")[1].split("&")[0]} - Horário: ${item.horario}`;
+                
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "X";
+                deleteButton.classList.add("delete-btn");
+                deleteButton.onclick = () => removerAgendamento(index);
+
+                listItem.appendChild(deleteButton);
+                listElement.appendChild(listItem);
+            });
+        }
+
+        function verificarAgendamentos() {
+            const agora = new Date();
+            const horaAtual = agora.getHours().toString().padStart(2, "0") + ":" + agora.getMinutes().toString().padStart(2, "0");
+
+            scheduleList.forEach((item) => {
+                if (item.horario === horaAtual) {
+                    abrirCamera(item.cameraUrl);
+                }
+            });
+        }
+
+        function abrirCamera(cameraUrl) {
+            document.getElementById("camera-stream").src = cameraUrl;
+        }
+
+        function limparAgendamentos() {
+            scheduleList = [];
+            salvarAgendamentos();
+            atualizarLista();
+        }
+
+        function removerAgendamento(index) {
+            scheduleList.splice(index, 1);
+            salvarAgendamentos();
+            atualizarLista();
+        }
+
+        setInterval(verificarAgendamentos, 10);
+        atualizarLista();
+
+        document.querySelectorAll(".camera-button").forEach(button => {
+            button.addEventListener("click", function() {
+                abrirCamera(this.getAttribute("data-camera"));
+            });
+        });
+        
+
+        //eitura do excel
+        document.getElementById("file-input").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+        
+            reader.onload = function(e) {
+                const workbook = XLSX.read(e.target.result, { type: "array" });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // Leitura com cabeçalho
+        
+                console.log("Dados lidos do Excel:", data);  // Verifique os dados lidos da planilha
+        
+                const header = data[0];
+                const cameraIndex = header.indexOf("Câmera");
+                const horarioIndex = header.indexOf("Horário");
+        
+                if (cameraIndex === -1 || horarioIndex === -1) {
+                    alert("As colunas 'Câmera' e 'Horário' não foram encontradas.");
+                    return;
+                }
+        
+                data.slice(1).forEach(row => { // Remover o cabeçalho da iteração
+                    const camera = row[cameraIndex];
+                    const horario = row[horarioIndex];
+        
+                    console.log("Linha lida do Excel:", row);  // Verifique os dados de cada linha
+        
+                    if (camera && horario) {
+                        scheduleList.push({ cameraUrl: camera, horario: horario });
+                    } else {
+                        console.log("Faltando dados na linha:", row);  // Mostra as linhas faltando valores
+                    }
+                });
+        
+                salvarAgendamentos();  // Salvar agendamentos
+                atualizarLista();  // Atualizar a lista de agendamentos
+            };
+        
+            reader.readAsArrayBuffer(file); // Usando arrayBuffer ao invés de binaryString
+        });
+        

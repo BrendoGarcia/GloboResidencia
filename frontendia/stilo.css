@@ -1,148 +1,181 @@
-/* Definindo o estilo global da página */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+:root {
+    --azul-globo: #1c1caa;
+    --roxo-globo: #6c63ff;
+    --branco: #ffffff;
+    --cinza-claro: #f4f4f4;
+    --cinza-medio: #ccc;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--cinza-claro);
     margin: 0;
-    padding: 20px;
-}
-
-/* Título da página */
-h1 {
+    padding: 0;
+    color: #333;
+  }
+  
+  header {
+    background: var(--azul-globo);
+    color: var(--branco);
     text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Container principal para o vídeo e informações da câmera */
-#video {
+    padding: 20px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-bottom: 80px;
-    width: 100%;
-    max-width: 1000px;
-}
-
-/* Estilo para o container que envolve o vídeo e informações */
-.video-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Estilo para o log */
-#log-container {
-    border-radius: 8px;
-    border: 1px solid #000;
+    gap: 20px;
+  }
+  
+  .logo-globo {
+    width: 100px;
+    height: auto;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  .infocamera {
+    text-align: center;
     padding: 10px;
-    max-height: 200px;
-    width: 500px;
-    overflow-y: auto;
-    position: relative;
-    margin-top: 20px; /* Espaço extra abaixo do vídeo */
-}
-
-/* Estilo para o título do log */
-#log-container h3 {
-    position: sticky;
-    top: -10px;
-    background: white;
-    padding: 8px;
-    margin: -10px;
-    border-bottom: 1px solid #000;
-    text-align: center;
-    z-index: 8;
-}
-
-/* Estilo para as informações da câmera */
-.infocamera {
-    color: #4CAF50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/* Nome da câmera e IP */
-.nomecamera, .ipcamera {
+    background: var(--roxo-globo);
+    color: white;
+  }
+  
+  .nomecamera, .ipcamera {
     margin: 5px 0;
-}
+    font-weight: bold;
+  }
+  
+  #video {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .camera-buttons {
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .camera-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    background: var(--azul-globo);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .camera-button:hover {
+    background: var(--roxo-globo);
+  }
+  
+  #camera-stream {
+    width: 480px;
+    height: 327px;
+    border-radius: 10px;
+    border: 2px solid var(--azul-globo);
+  }
+  
+  #log-container {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 200px;
+    width: 300px;
+    overflow-y: auto;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  #log-container h3 {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .schedule-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    background: white;
+    border-top: 4px solid var(--roxo-globo);
+    flex-wrap: wrap;
+  }
+  
+  .containerregistros {
+    width: 300px;
+  }
+  
+  .containerregistros h3,
+  .schedule-list h4 {
+    text-align: center;
+  }
+  
+  input[type="time"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--cinza-medio);
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background: var(--roxo-globo);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: var(--azul-globo);
+  }
+  
+  .schedule-list {
+    width: 300px;
+    background: var(--cinza-claro);
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    max-height: 200px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  footer {
+    background: var(--azul-globo);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+  }
+  
 
 /* Câmera */
 #camera-stream {
-    border: 2px solid #000;
+    border: 2px solid #ddd;
     border-radius: 8px;
     width: 480px;
     height: 327px;
     transition: all 0.3s ease;
 }
 
-.increase-size-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-.increase-size-button:hover {
-    background-color: #45a049;
-}
-
-/* Botões abaixo da câmera */
-.camera-buttons {
-    border-radius: 8px;
-    border: 1px solid #000;
-    padding: 10px;
-    overflow-y: auto;
-    width: 500px;
-    height: 230px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.camerasbotons {
-    position: sticky;
-    height: 13px;
-    width: 331px;
-    top: -11px;
-    background: white;
-    padding: 19px;
-    margin: 0;
-    border-bottom: 1px solid #000;
-    text-align: center;
-    z-index: 57;
-}
-
-/* Estilo dos botões */
-.camera-button {
-    width: 180px;
-    height: 80px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-bottom: 10px; /* Espaço extra entre os botões */
-}
-
-.camera-button:hover {
-    background-color: #45a049;
-}
+/* Preview da câmera */
 .preview {
     border-radius: 5px;
     position: absolute;
@@ -152,54 +185,31 @@ h1 {
     border: 2px solid white;
     display: none;
     z-index: 1000;
-    pointer-events: none; /* Evita interferência do mouse */
+    pointer-events: none;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
-
- /* Footer */
- footer {
-    background-color: #333;
+#maximize-btn{
+    width: 33%;
+    padding: 10px;
+    background: var(--roxo-globo);
     color: white;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 4rem;
-  }
-
-.schedule-list {
-    width: 295px;
-    height: 165px;
-    overflow-y: auto;
+    border: none;
+    border-radius: 5px;
     margin-top: 10px;
-    font-size: 19px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    border-radius: 5px;
-    gap: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
-
-.schedule-list h4 {
-    position: sticky;
-    top: -10px;
-    background: white;
-    padding: 8px;
-    margin: -10px;
-   
-    text-align: center;
-    z-index: 8;
-}
-
-.schedule-container {
+#ajustandomaximos{
     display: flex;
-    gap: 150px;
-   
-    padding: 10px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    border-radius: 5px;
+    justify-items: center;
+    width: 60%;
+    height: 50%;
     flex-direction: row;
-    flex-wrap: nowrap;
     align-content: stretch;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: baseline;
 }
+
+
+
+

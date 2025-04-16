@@ -9,14 +9,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <h1>VisionGuard 1.0</h1>
+    <header>
+        <img src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TV_Globo_2021.svg/250px-TV_Globo_2021.svg.png" alt="Logo Globo" class="logo-globo" />
+        <h1>GloboWatch</h1>
+    </header>
+
     <div class="infocamera">
     <h3 class="nomecamera">Rua Aurora</h3>
     <h3 class="ipcamera">192.184.78.184</h3>
     </div>
 
-    <div id="video">
-        
+
+    <div id="video">  
     <div class="camera-buttons">
         <h3 class="camerasbotons">Cameras</h3>
         <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Rua da Aurora</button>
@@ -28,15 +32,17 @@
    
     <div id="preview" class="preview"></div>
     <div id="camera-display" class="camera-display"></div>
-
-        <img id="camera-stream" src="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892">
+        
+        <img id="camera-stream" src="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km799&AuthUser=appconcer&AuthPass=CoNcrRdi13892" >
         <div id="log-container">
             <h3>Log</h3>
             <div id="log-content"></div>
         </div>
-
-
     </div>
+        <div id="ajustandomaximos" >
+            <button id="maximize-btn">Maximizar</button>
+        </div>
+        <br></br>
 
       <!-- Área de Programação de Câmeras -->
       <div class="schedule-container">
@@ -66,9 +72,13 @@
         </div>
     </div>
     
-
+    <footer>
+        <p>© 2025 Globo - Todos os direitos reservados</p>
+    </footer>
 
 
     <script defer src="scripts.js"></script>
+    <script defer src="/script.js"></script>
+    <script defer src="/maximos.js"></script>
 </body>
 </html>

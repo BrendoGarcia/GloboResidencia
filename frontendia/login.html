@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Vendedores Samsung</title>
+    <title>Login - Sistema GloboWatch</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,8 +16,14 @@
             background: linear-gradient(135deg, #1428a0, #00a8e8);
             color: #fff;
         }
+        #imagsglobo{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
 
         .login-container {
+            display: flex;
             background-color: #fff;
             color: #000;
             padding: 2rem;
@@ -25,6 +31,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
+            flex-direction: column;
         }
 
         .login-container h1 {
@@ -88,7 +95,10 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Login Samsung</h1>
+        <div id="imagsglobo">
+            <img src="//upload.wikimedia.org/wikipedia/commons/thumb/1/1a/TV_Globo_2021.svg/250px-TV_Globo_2021.svg.png" alt="Logo Globo" class="logo-globo" />
+        </div>
+        <h1>Login GloboWatch</h1>
         <form id="loginForm">
             <div class="form-group">
                 <label for="username">Usuário</label>
@@ -118,7 +128,7 @@ loginForm.addEventListener('submit', function(event) {
         alert(`Bem-vindo, ${username}!`);
         
         // Redirecionamento após login bem-sucedido
-        window.location.href = 'https://brendogarcia.github.io/GerenciamentoDeFilas/gerenciar.html'; // Altere para a URL de destino desejada
+        window.location.href = 'index.html'; // Altere para a URL de destino desejada
 
     } else {
         alert('Por favor, preencha todos os campos ou verifique suas credenciais.');

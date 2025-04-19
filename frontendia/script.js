@@ -239,3 +239,31 @@ let scheduleList = JSON.parse(localStorage.getItem("scheduleList")) || [];
             reader.readAsArrayBuffer(file); // Usando arrayBuffer ao invés de binaryString
         });
         
+
+        async function carregarDados() {
+            const res = await fetch('http://localhost:5000/dados_trafego');
+            const dados = await res.json();
+            const lista = document.getElementById("trafego-lista");
+            lista.innerHTML = "";
+
+            dados.forEach(dado => {
+                const li = document.createElement("li");
+                li.innerText = `[${dado.timestamp}] Veículos: ${dado.contagem} ${dado.alerta ? '🚨 ALERTA' : ''}`;
+                lista.appendChild(li);
+            });
+        }
+
+        // Atualiza a cada 5 segundos
+        setInterval(carregarDados, 5000);
+        carregarDados();
+
+
+        const sino = document.getElementById('imganalise');
+        const popup = document.getElementById('registros');
+      
+        sino.addEventListener('click', () => {
+          popup.classList.toggle('ativo');
+        });
+
+
+// Chamada pra pegar a quantidade de alertas

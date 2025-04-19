@@ -20,9 +20,9 @@
     text-align: center;
     padding: 20px 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
   }
   
   .logo-globo {
@@ -52,7 +52,7 @@
     gap: 20px;
     padding: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+
   }
   
   .camera-buttons {
@@ -202,14 +202,52 @@
 #ajustandomaximos{
     display: flex;
     justify-items: center;
-    width: 60%;
+    width: 48%;
     height: 50%;
     flex-direction: row;
     align-content: stretch;
     justify-content: flex-end;
     align-items: baseline;
 }
+#analise-container{
+    width: 19%;
+    display: flex;
+    justify-content: center;
+}
+#imganalise{
+  height: 10%;
+  width: 10%;
+}
+
+#analise-container {
+  position: relative; /* importante para posicionar o pop-up em relação ao sino */
+}
+
+#registros.popup {
+  pad:10px;
+  display: none;
+  position: absolute;
+  top: 8%; /* agora aparece logo abaixo da imagem */
+  right: 0;
+  width: 250px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 8px;
+  margin-top: 8px; /* dá um pequeno espaço entre o sino e o pop-up */
+}
+
+#registros.popup.ativo {
+  display: block;
+}
 
 
-
-
+.fixed-header{
+  position: sticky;
+  top: -16px;
+  background: white;
+  padding: 10px;
+  z-index: 1;
+}

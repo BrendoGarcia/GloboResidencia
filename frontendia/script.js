@@ -39,10 +39,11 @@ function reconhecerFala() {
 
         // Lista de palavras-chave (nomes de câmeras) que podem ser reconhecidas
         const camerasDisponiveis = [
-           "rua aurora",
-           "câmera 1",
-           "avenida conde da boa vista",
-           "câmera 2"
+           "rua da aurora",
+           "boa vista",
+           "conselheiro aquiar",
+           "br-101",
+           "praça 13 de maio"
         ];
 
         // Verifica se o comando corresponde a alguma das câmeras disponíveis
@@ -125,77 +126,92 @@ document.addEventListener("DOMContentLoaded", function() {
 
 let scheduleList = JSON.parse(localStorage.getItem("scheduleList")) || [];
 
-        function agendarCamera() {
-            const cameraUrl = document.getElementById("camera-select").value;
-            const horario = document.getElementById("schedule-time").value;
+function agendarCamera() {
+    const cameraUrl = document.getElementById("camera-select").value;
+    const horario = document.getElementById("schedule-time").value;
 
-            if (!horario) {
-                alert("Por favor, escolha um horário.");
-                return;
-            }
+    if (!horario) {
+        alert("Por favor, escolha um horário.");
+        return;
+    }
 
-            scheduleList.push({ cameraUrl, horario });
+    scheduleList.push({ cameraUrl, horario, executado: false });
+    salvarAgendamentos();
+    atualizarLista();
+}
+
+function salvarAgendamentos() {
+    localStorage.setItem("scheduleList", JSON.stringify(scheduleList));
+}
+
+function atualizarLista() {
+    const listElement = document.getElementById("schedule-list");
+    listElement.innerHTML = "";
+
+    scheduleList.forEach((item, index) => {
+        const listItem = document.createElement("li");
+
+        const cameraNome = item.cameraUrl.split("camera=")[1]?.split("&")[0] || item.cameraUrl;
+
+        listItem.textContent = `Câmera: ${cameraNome} - Horário: ${item.horario} `;
+
+        if (item.executado) {
+            const icon = document.createElement("span");
+            icon.textContent = "✅";
+            icon.style.marginLeft = "5px";
+            listItem.appendChild(icon);
+        }
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.classList.add("delete-btn");
+        deleteButton.onclick = () => removerAgendamento(index);
+
+        listItem.appendChild(deleteButton);
+        listElement.appendChild(listItem);
+    });
+}
+
+function verificarAgendamentos() {
+    const agora = new Date();
+    const horaAtual = agora.getHours().toString().padStart(2, "0") + ":" + agora.getMinutes().toString().padStart(2, "0");
+
+    scheduleList.forEach((item, index) => {
+        if (item.horario === horaAtual && !item.executado) {
+            abrirCamera(item.cameraUrl);
+            item.executado = true; // Marca como executado pra não repetir
             salvarAgendamentos();
             atualizarLista();
         }
+    });
+}
 
-        function salvarAgendamentos() {
-            localStorage.setItem("scheduleList", JSON.stringify(scheduleList));
-        }
+function abrirCamera(cameraUrl) {
+    document.getElementById("camera-stream").src = cameraUrl;
+}
 
-        function atualizarLista() {
-            const listElement = document.getElementById("schedule-list");
-            listElement.innerHTML = "";
+function limparAgendamentos() {
+    scheduleList = [];
+    salvarAgendamentos();
+    atualizarLista();
+}
 
-            scheduleList.forEach((item, index) => {
-                const listItem = document.createElement("li");
-                listItem.textContent = `Câmera: ${item.cameraUrl.split("camera=")[1].split("&")[0]} - Horário: ${item.horario}`;
-                
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "X";
-                deleteButton.classList.add("delete-btn");
-                deleteButton.onclick = () => removerAgendamento(index);
+function removerAgendamento(index) {
+    scheduleList.splice(index, 1);
+    salvarAgendamentos();
+    atualizarLista();
+}
 
-                listItem.appendChild(deleteButton);
-                listElement.appendChild(listItem);
-            });
-        }
+setInterval(verificarAgendamentos, 1000); // Verifica a cada 1 segundo
+atualizarLista();
 
-        function verificarAgendamentos() {
-            const agora = new Date();
-            const horaAtual = agora.getHours().toString().padStart(2, "0") + ":" + agora.getMinutes().toString().padStart(2, "0");
+// Botões de câmera SEM restrição
+document.querySelectorAll(".camera-button").forEach(button => {
+    button.addEventListener("click", function () {
+        abrirCamera(this.getAttribute("data-camera"));
+    });
+});
 
-            scheduleList.forEach((item) => {
-                if (item.horario === horaAtual) {
-                    abrirCamera(item.cameraUrl);
-                }
-            });
-        }
-
-        function abrirCamera(cameraUrl) {
-            document.getElementById("camera-stream").src = cameraUrl;
-        }
-
-        function limparAgendamentos() {
-            scheduleList = [];
-            salvarAgendamentos();
-            atualizarLista();
-        }
-
-        function removerAgendamento(index) {
-            scheduleList.splice(index, 1);
-            salvarAgendamentos();
-            atualizarLista();
-        }
-
-        setInterval(verificarAgendamentos, 10);
-        atualizarLista();
-
-        document.querySelectorAll(".camera-button").forEach(button => {
-            button.addEventListener("click", function() {
-                abrirCamera(this.getAttribute("data-camera"));
-            });
-        });
         
 
         //eitura do excel
@@ -245,25 +261,38 @@ let scheduleList = JSON.parse(localStorage.getItem("scheduleList")) || [];
             const dados = await res.json();
             const lista = document.getElementById("trafego-lista");
             lista.innerHTML = "";
-
+        
+            // Ordenar: alertas primeiro
+            dados.sort((a, b) => (b.alerta === true) - (a.alerta === true));
+        
             dados.forEach(dado => {
                 const li = document.createElement("li");
-                li.innerText = `[${dado.timestamp}] Veículos: ${dado.contagem} ${dado.alerta ? '🚨 ALERTA' : ''}`;
+                li.className = "camera-card";
+                if (dado.alerta) li.classList.add("alerta");
+        
+                li.innerHTML = `
+                    <h3>${dado.camera}</h3>
+                    <p><strong>Horário:</strong> ${dado.timestamp}</p>
+                    <p><strong>Veículos:</strong> ${dado.contagem}</p>
+                    <p><strong>Status:</strong> ${dado.alerta ? '🚨 ALERTA DE TRÁFEGO' : 'Normal'}</p>
+                `;
+        
                 lista.appendChild(li);
             });
         }
-
-        // Atualiza a cada 5 segundos
+        
         setInterval(carregarDados, 5000);
         carregarDados();
-
-
+        
+        
+        
         const sino = document.getElementById('imganalise');
         const popup = document.getElementById('registros');
-      
+        
         sino.addEventListener('click', () => {
-          popup.classList.toggle('ativo');
+            popup.classList.toggle('ativo');
         });
+        
 
 
 // Chamada pra pegar a quantidade de alertas

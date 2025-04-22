@@ -251,3 +251,66 @@
   padding: 10px;
   z-index: 1;
 }
+
+.popup {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  width: 350px;
+  max-height: 300px; /* altura máxima visível */
+  overflow-y: auto;  /* ativa rolagem vertical */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  padding: 20px;
+  display: none;
+  z-index: 999;
+}
+
+.popup.ativo {
+  display: block;
+}
+
+.popup h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+#trafego-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.camera-card {
+  background-color: #f4f4f4;
+  border-left: 5px solid #4a90e2;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.camera-card:hover {
+  background-color: #eaeaea;
+}
+
+.camera-card h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  color: #222;
+}
+
+.camera-card p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.camera-card.alerta {
+  border-left-color: #e74c3c;
+  background-color: #ffeaea;
+}

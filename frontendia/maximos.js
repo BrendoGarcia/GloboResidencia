@@ -31,8 +31,15 @@ let cameraWindow = null;
             // Aguarda um pouco para garantir que a nova janela esteja carregada antes de enviar a mensagem
             setTimeout(() => {
                 sendCameraToMaximized();
-            }, 500);
+            },1000);
         } else {
             cameraWindow.focus(); // Apenas foca se já estiver aberta
         }
     });
+
+
+    window.addEventListener("message", (event) => {
+        if (event.data?.type === "UPDATE_CAMERA") {
+          document.getElementById("remote-camera").src = event.data.url;
+        }
+      });

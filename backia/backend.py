@@ -32,10 +32,11 @@ def limpar_historico():
 
 # Mapeamento de ruas para URLs das câmeras
 cameras = {
-    "rua aurora": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km07&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "câmera 1": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km07&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "câmera 2": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km51&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "conde da boa vista": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km51&AuthUser=appconcer&AuthPass=CoNcrRdi13892"
+    "rua da aurora": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km61&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "boa vista": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km117&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "conselheiro aquiar": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km123&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "br-101": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km119&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
+    "praça 13 de maio": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km115&AuthUser=appconcer&AuthPass=CoNcrRdi13892"
 }
 
 @app.route('/obter_camera/<rua>', methods=['GET'])

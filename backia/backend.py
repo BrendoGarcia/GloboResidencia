@@ -11,7 +11,7 @@ CORS(app)
 
 historico = []
 
-def limpar_historico():
+def limpar_historico(): # refatorar para classes caso seja necessário.
     print("[INFO] Limpando histórico...")
 
     # Mantém apenas os registros com alerta mais recente de cada câmera
@@ -50,7 +50,7 @@ def obter_camera(rua):
 
 
 @app.route('/receber_dados', methods=['POST'])
-def receber_dados():
+def receber_dados(): # refatorar para classes.
     data = request.json
     if not data or 'camera' not in data:
         return jsonify({"status": "erro", "msg": "Dados inválidos"}), 400

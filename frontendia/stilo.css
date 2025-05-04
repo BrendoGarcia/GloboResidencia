@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+
 :root {
     --azul-globo: #1c1caa;
     --roxo-globo: #6c63ff;
@@ -7,7 +10,7 @@
   }
   
   body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family:  'Roboto','Segoe UI', sans-serif;
     background-color: var(--cinza-claro);
     margin: 0;
     padding: 0;
@@ -23,6 +26,8 @@
     gap: 20px;
     justify-content: space-evenly;
     align-items: center;
+    font-size: 18px;
+    font-weight: 700;
   }
   
   .logo-globo {
@@ -40,6 +45,25 @@
     padding: 10px;
     background: var(--roxo-globo);
     color: white;
+    display: flex;
+    align-items: center;        
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  .infocamera .center {
+    margin: 0 auto;
+    text-align: center;
+    padding-left:70px;
+  }
+
+  .infocamera .right {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    align-items: center;
   }
   
   .nomecamera, .ipcamera {
@@ -51,8 +75,7 @@
     display: flex;
     gap: 20px;
     padding: 20px;
-    justify-content: center;
-
+    justify-content: center;  
   }
   
   .camera-buttons {
@@ -92,7 +115,7 @@
     background: white;
     border-radius: 10px;
     padding: 15px;
-    max-height: 200px;
+    max-height: 400px;
     width: 300px;
     overflow-y: auto;
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
@@ -106,11 +129,11 @@
   .schedule-container {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 200px;
     padding: 20px;
     background: white;
-    border-top: 4px solid var(--roxo-globo);
     flex-wrap: wrap;
+    font-size: 19px;
   }
   
   .containerregistros {
@@ -122,9 +145,15 @@
     text-align: center;
   }
   
-  input[type="time"],
   select {
     width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--cinza-medio);
+  }
+  input[type="time"] {
+    width: 93%;
     padding: 10px;
     margin-top: 5px;
     border-radius: 5px;
@@ -149,12 +178,13 @@
   
   .schedule-list {
     width: 300px;
-    background: var(--cinza-claro);
+    background: var(--cinza-medio);
     border-radius: 10px;
     padding: 15px;
     overflow-y: auto;
-    max-height: 200px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    max-height: 320px;
+    box-shadow: 0 0 0px 15px var(--cinza-medio);
+    margin-top: 30px;
   }
   
   footer {
@@ -170,8 +200,8 @@
 #camera-stream {
     border: 2px solid #ddd;
     border-radius: 8px;
-    width: 480px;
-    height: 327px;
+    width: 580px;
+    height: auto;
     transition: all 0.3s ease;
 }
 
@@ -189,7 +219,7 @@
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 #maximize-btn{
-    width: 33%;
+    width: 20%;
     padding: 10px;
     background: var(--roxo-globo);
     color: white;
@@ -198,16 +228,25 @@
     margin-top: 10px;
     cursor: pointer;
     transition: background 0.3s;
+    font-size: 18px;
+    font-weight: 600;
 }
+
+#maximize-btn:hover{
+  background-color: #4a90e2;
+}
+
 #ajustandomaximos{
     display: flex;
     justify-items: center;
-    width: 48%;
+    width: 100%;
     height: 50%;
     flex-direction: row;
     align-content: stretch;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: baseline;
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--roxo-globo);
 }
 #analise-container{
     width: 19%;
@@ -215,8 +254,7 @@
     justify-content: center;
 }
 #imganalise{
-  height: 10%;
-  width: 10%;
+  height: 30px;
 }
 
 #analise-container {

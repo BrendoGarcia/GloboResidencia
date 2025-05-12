@@ -39,11 +39,15 @@ function reconhecerFala() {
 
         // Lista de palavras-chave (nomes de câmeras) que podem ser reconhecidas
         const camerasDisponiveis = [
+           "boa viagem",
+           "guararapes",
            "rua da aurora",
-           "boa vista",
-           "conselheiro aquiar",
+           "derby",
+           "av. conde da boa vista",
            "br-101",
-           "praça 13 de maio"
+           "pe-15",
+           "torre aurora",
+           "caruaru"
         ];
 
         // Verifica se o comando corresponde a alguma das câmeras disponíveis
@@ -100,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function showPreview(cameraUrl, event) {
         preview.style.display = "block";
         preview.style.borderRadius = "8px";
-        preview.innerHTML = `<img src="${cameraUrl}" alt="Prévia da câmera">`;
+        preview.innerHTML = `<iframe src="${cameraUrl}" alt="Prévia da câmera">`;
         movePreview(event);
     }
 
@@ -295,4 +299,19 @@ document.querySelectorAll(".camera-button").forEach(button => {
         
 
 
-// Chamada pra pegar a quantidade de alertas
+// pesquisas das cameras.
+
+const searchInput = document.getElementById("searchInput");
+    const buttons = document.querySelectorAll(".camera-button");
+
+    searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        buttons.forEach(button => {
+            const text = button.textContent.toLowerCase();
+            if (text.includes(query)) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        });
+    });

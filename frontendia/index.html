@@ -22,7 +22,7 @@
         </div>
         <div class="right">
             <div id="analise-container">
-                <img id="imganalise" src="/frontendia/imgstemas/icone-de-cloche-et-d-alerte-jaune.png" alt="Sino de notificações">
+                <img id="imganalise" src="/imgstemas/icone-de-cloche-et-d-alerte-jaune.png" alt="Sino de notificações">
                 <span id="notificacao-contador" class="contador">0</span>
     
                 
@@ -39,17 +39,23 @@
 
     <div id="video">  
     <div class="camera-buttons">
-        <h3 class="camerasbotons">Cameras</h3>
-        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Rua da Aurora</button>
-        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km117&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Boa Vista</button>
-        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km123&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Conselheiro Aquiar</button>
-        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km119&AuthUser=appconcer&AuthPass=CoNcrRdi13892">BR 101</button>
-        <button class="camera-button" data-camera="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km115&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Praça 13 de Maio</button>
+        <div class="tts">
+        <h3 class="camerasbotons">Cameras</h3> <input type="text" id="searchInput" placeholder="Pesquisar câmera...">
+        </div>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera1">BOA VIAGEM</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera2">GUARARAPES</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera3">RUA DA AURORA</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera4">DERBY</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera5">AV. CONDE DA BOA VISTA</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera6">BR-101</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera7">PE-15</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera8">TORRE AURORA</button>
+        <button class="camera-button" data-camera="http://localhost:1984/stream.html?src=camera9">CARUARU</button>
     </div>
    
     <div id="preview" class="preview"></div>
     <div id="camera-display" class="camera-display"></div>    
-        <img id="camera-stream" src="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km113&AuthUser=appconcer&AuthPass=CoNcrRdi13892" >
+        <iframe id="camera-stream" src="http://localhost:1984/stream.html?src=camera1"></iframe>
         <div id="log-container">
             <h3 class="fixed-header" >Log</h3>
             <div id="log-content"></div>
@@ -66,11 +72,15 @@
         <h3>Programar Câmera</h3>
         <label for="camera-select">Escolha a câmera:</label>
         <select id="camera-select">
-            <option value="https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km61&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Rua da Aurora</option>
-            <option value="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km117&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Boa Vista</option>
-            <option value="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km123&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Conselheiro Aquiar</option>
-            <option value="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km119&AuthUser=appconcer&AuthPass=CoNcrRdi13892">BR 101</option>
-            <option value="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km115&AuthUser=appconcer&AuthPass=CoNcrRdi13892">Praça 13 de Maio</option>
+            <option value="http://localhost:1984/stream.html?src=camera1">BOA VIAGEM</option>
+            <option value="http://localhost:1984/stream.html?src=camera2">GUARARAPES</option>
+            <option value="http://localhost:1984/stream.html?src=camera3">RUA DA AURORA</option>
+            <option value="http://localhost:1984/stream.html?src=camera4">DERBY</option>
+            <option value="http://localhost:1984/stream.html?src=camera5">AV. CONDE DA BOA VISTA</option>
+            <option value="http://localhost:1984/stream.html?src=camera6">BR-101</option>
+            <option value="http://localhost:1984/stream.html?src=camera7">PE-15</option>
+            <option value="http://localhost:1984/stream.html?src=camera8">TORRE AURORA</option>
+            <option value="http://localhost:1984/stream.html?src=camera9">CARUARU</option>
         </select>
         <br><br>
         <label for="schedule-time">Horário:</label>

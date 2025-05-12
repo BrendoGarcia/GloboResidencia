@@ -76,9 +76,13 @@
     gap: 20px;
     padding: 20px;
     justify-content: center;  
+    height: 100%;
+   
   }
   
   .camera-buttons {
+    max-height: 400px;
+    overflow-y: auto;
     width: 300px;
     background: white;
     border-radius: 10px;
@@ -351,4 +355,47 @@
 .camera-card.alerta {
   border-left-color: #e74c3c;
   background-color: #ffeaea;
+}
+
+
+
+
+
+
+#analise-container {
+    position: relative;
+}
+
+#notificacao-contador {
+    position: absolute;
+    top: -5px; /* Distância do topo do sino */
+    right: -5px; /* Distância da borda direita */
+    background: #ff4d4d;
+    color: white;
+    border-radius:100%;
+    padding: 2px 4px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+#sino {
+    position: relative;
+    z-index: 1;
+}
+
+#notificacao-contador.ativo {
+    background-color: #ff3333;
+}
+.tts{
+position: sticky; 
+top: -16px; 
+background: white;
+padding: 10px; 
+z-index: 1;
+width: 266px;
 }

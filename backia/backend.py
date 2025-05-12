@@ -32,11 +32,15 @@ def limpar_historico(): # refatorar para classes caso seja necessário.
 
 # Mapeamento de ruas para URLs das câmeras
 cameras = {
-    "rua da aurora": "https://cameras1.concer.com.br:8401/interface/cameras/getjpegstream?camera=km61&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "boa vista": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km117&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "conselheiro aquiar": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km123&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "br-101": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km119&AuthUser=appconcer&AuthPass=CoNcrRdi13892",
-    "praça 13 de maio": "https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km115&AuthUser=appconcer&AuthPass=CoNcrRdi13892"
+    "boa viagem":                 "http://localhost:1984/stream.html?src=camera1",
+    "guararapes":                 "http://localhost:1984/stream.html?src=camera2",
+    "rua da aurora":              "http://localhost:1984/stream.html?src=camera3",
+    "derby":                      "http://localhost:1984/stream.html?src=camera4",
+    "avenida conde da boa vista": "http://localhost:1984/stream.html?src=camera5",
+    "br-101":                     "http://localhost:1984/stream.html?src=camera6",
+    "pe-15":                      "http://localhost:1984/stream.html?src=camera7",
+    "torre aurora":               "http://localhost:1984/stream.html?src=camera8",
+    "caruaru":                    "http://localhost:1984/stream.html?src=camera9"
 }
 
 @app.route('/obter_camera/<rua>', methods=['GET'])

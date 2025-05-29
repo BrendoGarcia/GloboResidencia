@@ -1,0 +1,79 @@
+/* MainPage.css */
+.main-page-container {
+    display: flex;
+    flex-direction: column;
+    /* min-height: 100vh; */ /* Removido para permitir que o conteúdo dite a altura e o body scrolle */
+    flex-grow: 1; /* Para ocupar o espaço disponível no #root flex container */
+    background-color: var(--cinza-claro);
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.main-content-area {
+    display: flex;
+    flex-grow: 1;
+    padding: 25px; /* Aumentar padding geral da área de conteúdo */
+    gap: 60px; /* Aumentar gap entre as colunas principais */
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+/* Estilos para o container do controle de voz, movido para cá para organização */
+.voice-control-container {
+    background-color: var(--branco, #fff);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center; 
+    margin-top: 10px; /* Adicionado para separar um pouco se estiver empilhado */
+}
+
+.voice-button {
+    padding: 12px 20px; /* Aumentar padding */
+    background-color: var(--azul-globo);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem; /* Aumentar fonte */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 12px; 
+    min-height: 44px;
+}
+
+.voice-button.active {
+    background-color: var(--vermelho-botao-desativar, #e74c3c); 
+}
+
+.voice-button:hover {
+    opacity: 0.85;
+}
+
+.voice-status {
+    font-size: 0.95rem;
+    color: var(--cinza-escuro, #555);
+    min-height: 22px; 
+}
+
+.controls-and-scheduler-area {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+}
+
+.controls-and-scheduler-area > div { 
+    width: 100%; 
+}
+
+.stream-and-logs-area > div:not(.maximize-button-container) { 
+    
+}
+
+/* Garante que o LogDisplay tenha espaço para scroll interno e não expanda indefinidamente o pai */
+.stream-and-logs-area .log-display-container {
+    flex-shrink: 1; /* Permite encolher se necessário, mas max-height controla */
+    min-height: 200px; /* Uma altura mínima para ser visível */
+    /* max-height já está definido em LogDisplay.css, o que é bom */
+}
+

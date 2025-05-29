@@ -1,0 +1,80 @@
+/* LogDisplay.css */
+.log-display-container {
+    background: var(--branco);
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 350px; /* Altura máxima para o container de logs */
+    /* width: 300px; */ /* Largura será controlada pelo grid/flex do pai */
+    overflow-y: auto; /* Habilita scroll vertical quando necessário */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Evita que o container encolha demais se houver pouco espaço */
+}
+
+.log-header {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--azul-globo);
+    position: sticky;
+    top: -15px; /* Compensa o padding do container */
+    background: var(--branco);
+    padding: 10px 0;
+    z-index: 10;
+    margin-left: -15px; /* Estica para cobrir o padding do pai */
+    margin-right: -15px; /* Estica para cobrir o padding do pai */
+    border-bottom: 1px solid var(--cinza-claro);
+}
+
+.log-content-area {
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll interno para as entradas de log */
+    padding-top: 5px; /* Espaço após o header fixo */
+}
+
+.no-logs {
+    text-align: center;
+    color: var(--cinza-medio);
+    padding: 20px;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.log-entry {
+    margin-bottom: 8px;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+}
+
+.log-entry:last-child {
+    margin-bottom: 0;
+}
+
+.log-emoji {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.log-timestamp {
+    color: #777;
+    margin-right: 8px;
+    font-size: 0.8rem;
+}
+
+.log-message {
+    color: var(--preto);
+    word-break: break-word;
+}
+
+/* Estilos para diferentes tipos de log podem ser adicionados aqui se necessário */
+.log-entry.error .log-message {
+    color: var(--globo-vermelho);
+    font-weight: bold;
+}
+

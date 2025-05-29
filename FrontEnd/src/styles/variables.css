@@ -1,0 +1,15 @@
+:root {
+    --azul-globo: #1c1caa;
+    --roxo-globo: #6c63ff;
+    --branco: #ffffff;
+    --cinza-claro: #f4f4f4;
+    --cinza-medio: #ccc;
+    --preto: #333333;
+    /* Novas cores baseadas na pesquisa - a serem refinadas/confirmadas */
+    --globo-vermelho: #E6332A; /* Exemplo, precisa de confirmação */
+    --globo-laranja: #FF7A00; /* Exemplo, precisa de confirmação */
+    --globo-amarelo: #FFCB00; /* Exemplo, precisa de confirmação */
+    --globo-verde: #00A859;   /* Exemplo, precisa de confirmação */
+    --globo-azul-claro: #00A8E8; /* Exemplo, da página de login original */
+}
+

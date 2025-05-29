@@ -1,0 +1,26 @@
+/* MaximizeButton.css */
+.maximize-button-container-main {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0; /* Espaçamento vertical */
+    /* Este container pode ser estilizado para se ajustar melhor ao layout da MainPage */
+}
+
+#maximize-btn-react {
+    padding: 10px 25px;
+    background: var(--roxo-globo);
+    color: var(--branco);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#maximize-btn-react:hover {
+  background-color: var(--azul-globo); /* Mudança para azul no hover */
+  transform: translateY(-1px);
+}
+

@@ -1,0 +1,45 @@
+/* Header.css */
+.main-header {
+    background: var(--azul-globo); /* Cor principal da Globo */
+    padding: 15px 30px;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(221, 85, 85, 0.1);
+}
+
+.header-logo-title {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-between;
+}
+
+.header-logo-globo {
+    width: 90px; /* Ajustar conforme o novo design */
+    height: auto;
+}
+
+.main-header h1 {
+    font-size: 1.7rem; /* Ajustar tamanho */
+    margin: 0;
+    font-weight: 700;
+}
+
+.logout-button {
+    background-color: var(--roxo-globo); /* Cor de destaque Globo */
+    color: var(--branco);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #5a52cc; /* Um tom mais escuro do roxo para hover */
+    transform: translateY(-1px);
+}
+

@@ -1,0 +1,55 @@
+/* CameraStream.css */
+.camera-stream-container {
+    width: 100%; /* Ocupa toda a largura do contêiner pai */
+    aspect-ratio: 16 / 9; /* Mantém a proporção de vídeo 16:9 */
+    max-width: 100%; /* Garante que não ultrapasse o contêiner pai */
+    border-radius: 10px;
+    border: 2px solid var(--azul-globo);
+    overflow: hidden; /* Para conter o iframe */
+    background-color: #000; /* Fundo preto para o stream */
+    display: flex; /* Para centralizar mensagem de erro */
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative; /* Necessário para o iframe absoluto se usarmos padding-bottom trick */
+}
+
+.camera-stream-container.no-stream {
+    border-color: var(--cinza-medio);
+}
+
+.camera-stream-container.no-stream p {
+    color: var(--cinza-medio);
+    font-style: italic;
+}
+
+#camera-stream-iframe {
+    width: 100%;
+    height: 100%;
+    display: block; /* Remove espaço extra abaixo do iframe */
+    border: none; /* Remove borda padrão do iframe */
+}
+
+/* Estilos para o botão de maximizar podem ser adicionados aqui ou em um componente separado */
+.maximize-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Espaço acima do botão */
+}
+
+#maximize-btn-react {
+    padding: 10px 20px;
+    background: var(--roxo-globo);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#maximize-btn-react:hover {
+  background-color: #5a52cc; /* Tom mais escuro do roxo */
+}
+

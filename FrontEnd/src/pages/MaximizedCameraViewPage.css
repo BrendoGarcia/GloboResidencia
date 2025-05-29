@@ -1,0 +1,24 @@
+/* MaximizedCameraViewPage.css */
+html, body, #root, .maximized-camera-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex; /* Para centralizar conteúdo se necessário */
+
+}
+
+.maximized-camera-container.no-stream-max p {
+    color: var(--cinza-medio);
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+#remote-camera-iframe-maximized {
+    width: 100vw; /* Ocupa toda a largura da viewport */
+    height: 100vh; /* Ocupa toda a altura da viewport */
+    object-fit: contain; /* Garante que todo o vídeo seja visível, pode usar 'cover' se preferir preencher */
+    display: block;
+    border: none; /* Remove qualquer borda do iframe */
+}
+

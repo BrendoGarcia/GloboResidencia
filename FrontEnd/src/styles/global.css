@@ -1,0 +1,175 @@
+@import './variables.css';
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100%; /* Body must be at least viewport height */
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cinza-fundo, #f4f7f6);
+    color: var(--preto, #333);
+    line-height: 1.6;
+    display: flex; /* Use flex to manage #root's height */
+    flex-direction: column;
+}
+
+#root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* #root will take up all available space in body */
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+.main-page-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* This container grows to fill #root */
+    width: 100%; 
+    background-color: var(--cinza-claro);
+    box-sizing: border-box;
+}
+
+.main-content-area {
+    display: flex;
+    flex-grow: 1; /* This area grows if its content is large, pushing .main-page-container */
+    padding: 25px;
+    gap: 25px;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.stream-and-logs-area {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 77%; 
+    min-width: 480px; 
+    gap: 25px; /* Increased gap */
+}
+
+.controls-and-scheduler-area { 
+    display: flex;
+    flex-direction: column;
+    flex-basis: 40%; 
+    gap: 25px; /* Increased gap */
+    min-width: 320px; 
+}
+
+/* General button styling improvements */
+button, input[type="button"], input[type="submit"], input[type="file"]::file-selector-button {
+    padding: 12px 20px;
+    font-size: 1.05rem;
+    min-height: 48px; /* Increased min-height for better touch/click */
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid var(--cinza-medio, #ccc);
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    font-weight: 500;
+    background-color: #f0f0f0; /* Default background for non-primary buttons */
+    color: #333;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="file"]::file-selector-button:hover {
+    transform: translateY(-1px);
+    border-color: var(--azul-globo, #1c1caa);
+    background-color: #e9e9e9;
+}
+
+/* Primary buttons */
+button.primary, 
+.scheduler-button, /* Includes .add-button and .clear-all-button if they have this class */
+.voice-button,
+#maximize-btn-react {
+    background-color: var(--azul-globo, #1c1caa);
+    color: white;
+    border-color: var(--azul-globo, #1c1caa);
+}
+button.primary:hover, 
+.scheduler-button:hover, 
+.voice-button:hover,
+#maximize-btn-react:hover {
+    background-color: var(--roxo-globo, #6c63ff);
+    border-color: var(--roxo-globo, #6c63ff);
+}
+
+.scheduler-button.clear-all-button {
+    background-color: var(--globo-vermelho, #e74c3c);
+    border-color: var(--globo-vermelho, #e74c3c);
+}
+.scheduler-button.clear-all-button:hover {
+    background-color: #c0392b; /* Darker red */
+    border-color: #c0392b;
+}
+
+.voice-button.active {
+    background-color: var(--globo-vermelho, #e74c3c);
+    border-color: var(--globo-vermelho, #e74c3c);
+}
+.voice-button.active:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+/* Input fields general styling */
+input[type="text"], input[type="password"], input[type="time"], select {
+    padding: 12px 15px;
+    font-size: 1rem;
+    min-height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--cinza-medio, #ccc);
+    box-sizing: border-box;
+}
+input[type="text"]:focus, input[type="password"]:focus, input[type="time"]:focus, select:focus {
+    border-color: var(--roxo-globo, #6c63ff);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.25);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .main-content-area {
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+    .stream-and-logs-area, .controls-and-scheduler-area {
+        flex-basis: auto; 
+        width: 100%; 
+        min-width: auto; 
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content-area {
+        padding: 15px;
+        gap: 15px;
+        width: calc(100% - 30px);
+    }
+    button, input[type="button"], input[type="submit"], input[type="file"]::file-selector-button {
+        padding: 10px 15px; 
+        font-size: 1rem;
+        min-height: 44px;
+    }
+    input[type="text"], input[type="password"], input[type="time"], select {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+        min-height: 44px;
+    }
+}
+

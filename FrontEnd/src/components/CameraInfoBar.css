@@ -1,0 +1,114 @@
+/* CameraInfoBar.css */
+.camera-info-bar {
+    text-align: center;
+    padding: 12px 20px;
+    background: var(--roxo-globo); /* Usando uma cor de destaque da Globo */
+    color: var(--branco);
+    display: flex;
+    align-items: center;        
+    justify-content: space-between;
+    position: relative; /* Para o posicionamento do popup de alertas */
+    /* margin-bottom: 20px; */ /* Removido para ser controlado pelo layout da MainPage */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-bar-center {
+    margin: 0 auto; /* Centraliza se não houver elemento à direita */
+    text-align: center;
+    flex-grow: 1; /* Permite que o centro ocupe o espaço */
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo dentro do div */
+    gap: 20px; /* Espaço entre nome e IP */
+}
+
+.info-bar-right {
+    /* position: absolute; */ /* Removido para melhor flexibilidade com flexbox */
+    /* right: 20px; */
+    display: flex;
+    align-items: center;
+}
+
+.camera-name, .camera-ip {
+    margin: 0; /* Removido margin padrão de h3 */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.notification-area {
+    position: relative;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.notification-area svg {
+    fill: var(--branco);
+    stroke: var(--branco);
+}
+
+.notification-area .contador {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: var(--globo-vermelho); /* Cor de alerta */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+}
+
+/* Estilos para o popup de alertas de tráfego */
+.popup {
+  display: none; /* Escondido por padrão */
+  position: absolute;
+  top: 100%; /* Aparece abaixo da barra de info */
+  right: 0;
+  width: 300px; /* Largura do popup */
+  max-height: 300px; 
+  overflow-y: auto;  
+  background-color: var(--branco);
+  color: var(--preto);
+  border: 1px solid var(--cinza-medio);
+  border-top: none; /* Para se juntar visualmente à barra */
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  border-radius: 0 0 8px 8px; /* Cantos arredondados apenas na parte inferior */
+}
+
+.popup.active {
+  display: block; /* Mostra quando ativo */
+}
+
+.popup h1 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--azul-globo);
+}
+
+.popup ul {
+  border-radius: 10px;
+  border: solid;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.popup ul li {
+  padding: 0px 0;
+  border-bottom: 1px solid var(--cinza-claro);
+  font-size: 0.6rem;
+}
+
+.popup ul li:last-child {
+  border-bottom: none;
+}
+

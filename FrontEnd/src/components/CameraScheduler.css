@@ -1,0 +1,193 @@
+/* CameraScheduler.css */
+.camera-scheduler-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; /* Ajustado para space-between */
+    gap: 25px; /* Reduzido o gap principal */
+    padding: 20px;
+    background: var(--branco);
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    /* margin: 20px; */ /* Removida margem para ser controlada pelo pai */
+    width: 100%; /* Ocupar largura do container pai */
+    box-sizing: border-box;
+    flex-wrap: wrap; 
+}
+
+.scheduler-form-section, .scheduler-list-section {
+    flex-grow: 1; /* Permitir que cresçam igualmente */
+    flex-basis: 0; /* Base para crescimento igual */
+    min-width: 300px; /* Reduzido min-width para melhor flexibilidade */
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Aumentado gap interno */
+}
+
+.scheduler-form-section h3, .scheduler-list-section h4 {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--azul-globo);
+    font-size: 1.35rem; /* Aumentado tamanho da fonte */
+}
+
+.scheduler-form-section .form-group {
+    margin-bottom: 12px;
+}
+
+.scheduler-form-section label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 1rem; /* Aumentado tamanho da fonte */
+}
+
+.scheduler-form-section select,
+.scheduler-form-section input[type="time"],
+.scheduler-form-section .file-input {
+    width: 100%;
+    padding: 12px 15px; /* Aumentado padding */
+    border-radius: 6px;
+    border: 1px solid var(--cinza-medio);
+    font-size: 1rem; /* Aumentado tamanho da fonte */
+    box-sizing: border-box;
+    min-height: 44px; /* Altura mínima para inputs */
+}
+
+.scheduler-form-section select:focus,
+.scheduler-form-section input[type="time"]:focus {
+    border-color: var(--roxo-globo);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+.scheduler-button {
+    width: 100%;
+    padding: 14px; /* Aumentado padding */
+    background: var(--roxo-globo);
+    color: var(--branco);
+    border: none;
+    border-radius: 6px;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 1.05rem; /* Aumentado tamanho da fonte */
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    min-height: 48px; /* Altura mínima para botões */
+}
+
+.scheduler-button:hover {
+    background: var(--azul-globo);
+    transform: translateY(-2px);
+}
+
+.scheduler-button.add-button {
+    margin-bottom: 25px; 
+}
+
+.import-title {
+    font-size: 1.15rem; 
+    color: var(--preto);
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.scheduler-form-section .file-input {
+    padding: 10px; /* Ajustado padding para input de arquivo */
+}
+
+.scheduler-list-section {
+    background: var(--cinza-claro);
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 450px; /* Aumentada altura máxima para a lista */
+    display: flex; /* Adicionado para controle do filho */
+    flex-direction: column; /* Para o #schedule-list-react crescer */
+}
+
+.scheduler-list-section h4 {
+    border-bottom: 1px solid var(--cinza-medio);
+    padding-bottom: 12px;
+    flex-shrink: 0; /* Evitar que o header encolha */
+}
+
+#schedule-list-react {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; 
+    flex-grow: 1; 
+    /* max-height: calc(450px - 130px); */ /* Removido, flex-grow deve cuidar disso */
+    padding-right: 5px; /* Espaço para a barra de rolagem */
+}
+
+#schedule-list-react li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--cinza-medio);
+    font-size: 0.95rem; /* Aumentado tamanho da fonte */
+}
+
+#schedule-list-react li:last-child {
+    border-bottom: none;
+}
+
+#schedule-list-react li.executed span:first-child {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.executed-icon {
+    margin-left: 10px;
+    color: green;
+    font-size: 1.1rem; /* Aumentado ícone */
+}
+
+.delete-schedule-button {
+    background: none;
+    border: none;
+    color: var(--globo-vermelho);
+    font-weight: bold;
+    font-size: 1.2rem; /* Aumentado botão de deletar */
+    cursor: pointer;
+    padding: 8px;
+}
+
+.delete-schedule-button:hover {
+    color: darkred;
+}
+
+.no-schedules {
+    text-align: center;
+    color: var(--cinza-medio);
+    padding: 25px;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.scheduler-button.clear-all-button {
+    background-color: var(--globo-vermelho);
+    margin-top: 18px;
+    flex-shrink: 0; /* Evitar que o botão encolha */
+}
+
+.scheduler-button.clear-all-button:hover {
+    background-color: darkred;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 900px) { /* Ajustado breakpoint */
+    .camera-scheduler-container {
+        flex-direction: column;
+        align-items: stretch; /* Alinhar itens para ocupar largura */
+    }
+    .scheduler-form-section, .scheduler-list-section {
+        width: 100%; /* Ocupar toda a largura */
+        max-width: none; /* Remover max-width */
+        min-width: auto; /* Remover min-width */
+    }
+}
+

@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
-import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
+import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS Original
 import './DashboardPage.css';
 
 // Registrar componentes do Chart.js
@@ -53,7 +53,7 @@ const cameraCoordinates = {
   'CAMERA6': { name: 'BR-101', position: [-8.0900, -34.9300] },
   'CAMERA7': { name: 'PE-15', position: [-8.0100, -34.8700] },
   'CAMERA8': { name: 'Torre Aurora', position: [-8.0550, -34.8850] },
-  'CAMERA9': { name: 'Caruaru', position: [-8.2800, -35.9700] }, // Exemplo
+  'CAMERA9': { name: 'Caruaru', position: [-8.2800, -35.9700] }, 
 };
 
 // Função para calcular veículos detectados (soma de deltas positivos)
@@ -101,6 +101,12 @@ const calculateDetectedVehicles = (data) => {
   return totalDeltaSum;
 };
 
+//calculando valor dos Alertas em 24h
+
+
+
+
+
 // Função para calcular porcentagem de congestionamento
 const calculateCongestionPercentage = (data) => {
   if (!data || data.length === 0) return 0;
@@ -124,7 +130,7 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [refreshTime, setRefreshTime] = useState(new Date().toLocaleTimeString());
-  const [selectedTimeRange, setSelectedTimeRange] = useState('6h'); // Default 6 horas
+  const [selectedTimeRange, setSelectedTimeRange] = useState('24h'); // Default 6 horas
   const [selectedRua, setSelectedRua] = useState('TODAS'); // Default TODAS
 
   const [calculatedVehicles, setCalculatedVehicles] = useState(0);
@@ -132,14 +138,13 @@ const DashboardPage = () => {
   const [trafficVolumeChartData, setTrafficVolumeChartData] = useState({ labels: [], datasets: [] });
   const [congestionChartData, setCongestionChartData] = useState({ labels: [], datasets: [] });
   const [mapMarkers, setMapMarkers] = useState([]);
-
   // Função para buscar dados da API
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     const ruaParam = ruaToCameraMapping[selectedRua] || 'TODAS';
-    const horasParam = timeRangeToHoursMapping[selectedTimeRange] || 6;
+    const horasParam = timeRangeToHoursMapping[selectedTimeRange] || 24;
     const apiUrl = `http://localhost:5000/dashboard/dados?rua=${ruaParam}&horas=${horasParam}`;
 
     console.log(`Buscando dados de: ${apiUrl}`); // Log para debug
@@ -240,12 +245,12 @@ const DashboardPage = () => {
         labels: sortedHourLabels,
         datasets: [
           {
-            label: 'Registros COM Alerta',
+            label: 'Alertas',
             data: dataAlerts,
             backgroundColor: 'rgba(231, 76, 60, 0.7)', // Vermelho
           },
           {
-            label: 'Registros SEM Alerta',
+            label: 'Sem Alertas',
             data: dataNoAlerts,
             backgroundColor: 'rgba(46, 204, 113, 0.7)', // Verde
           }
@@ -286,7 +291,7 @@ const DashboardPage = () => {
 
   // Dados simulados para o gráfico de Pizza (Distribuição de Alertas) - Manter como está
   const alertsDistributionData = {
-    labels: ['Congestionamento', 'Acidentes', 'Obras', 'Eventos', 'Outros'],
+    labels: ['Alagamentos', 'Acidentes', 'Obras', 'Eventos', 'Outros'],
     datasets: [
       {
         label: 'Distribuição de Alertas',
@@ -309,6 +314,62 @@ const DashboardPage = () => {
       }
     ]
   };
+
+useEffect(() => {
+  const switchToCameraMap = {
+    SwitchBoaViagem: 'CAMERA1',
+    SwitchGuararapes: 'CAMERA2',
+    SwitchAurora: 'CAMERA3',
+    SwitchDerby: 'CAMERA4',
+    SwitchBoaVista: 'CAMERA5',
+    SwitchBR101: 'CAMERA6',
+    SwitchPE15: 'CAMERA7',
+    SwitchTorreAurora: 'CAMERA8',
+    SwitchCaruaru: 'CAMERA9',
+  };
+
+  const handleToggle = async (event) => {
+    const inputId = event.target.id;
+    const isChecked = event.target.checked;
+    const camera = switchToCameraMap[inputId];
+
+    if (!camera) return;
+
+    const url = isChecked 
+      ? 'http://localhost:5001/start'
+      : 'http://localhost:5001/stop';
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ camera })
+      });
+      console.log(`${isChecked ? 'Iniciado' : 'Parado'} monitoramento da ${camera}`);
+    } catch (error) {
+      console.error(`Erro ao enviar comando para ${camera}:`, error);
+    }
+  };
+
+  Object.keys(switchToCameraMap).forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener('change', handleToggle);
+    }
+  });
+
+  return () => {
+    Object.keys(switchToCameraMap).forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.removeEventListener('change', handleToggle);
+      }
+    });
+  };
+}, []);
+
 
   // Opções comuns para os gráficos
   const chartOptions = {
@@ -405,20 +466,18 @@ const DashboardPage = () => {
         <div className="stat-card">
           <h3>Veículos Detectados</h3>
           <p className="stat-value">{isLoading ? '-' : calculatedVehicles}</p>
-          <small>(Soma dos deltas positivos)</small>
         </div>
         <div className="stat-card">
           <h3>Velocidade Média</h3>
-          <p className="stat-value">N/A</p> {/* Conforme solicitado */} 
+          <p className="stat-value">34Kh</p> {/* Conforme solicitado */} 
         </div>
         <div className="stat-card">
           <h3>Congestionamento</h3>
           <p className="stat-value">{isLoading ? '-' : `${calculatedCongestion}%`}</p>
-          <small>(Alertas / Não Alertas)</small>
         </div>
         <div className="stat-card">
           <h3>Alertas Hoje</h3>
-          <p className="stat-value">N/A</p> {/* Usar dados da API se disponíveis ou manter N/A */} 
+          <p className="stat-value">0</p>{/*adcione aqui os metodos*/}
         </div>
       </div>
 
@@ -435,7 +494,7 @@ const DashboardPage = () => {
           
           {/* Gráfico de Congestionamento */}
           <div className="chart-container">
-            <h2>Registros com/sem Alerta por Hora</h2>
+            <h2>Alerta por Hora</h2>
             <div className="chart-wrapper">
               {isLoading ? <p>Carregando gráfico...</p> : <Bar data={congestionChartData} options={barChartOptions} />}
             </div>
@@ -443,7 +502,7 @@ const DashboardPage = () => {
           
           {/* Gráfico de Distribuição de Alertas (Pizza) */}
           <div className="chart-container">
-            <h2>Distribuição de Alertas (Simulado)</h2>
+            <h2>Alertas e Eventos no Recife (Simulado)</h2>
             <div className="chart-wrapper pie-chart-wrapper">
               <Pie data={alertsDistributionData} options={{
                 ...chartOptions,
@@ -456,6 +515,83 @@ const DashboardPage = () => {
               }} />
             </div>
           </div>
+
+            <div className="chart-container">
+            <h2>Ativar Monitoramento</h2>
+            <div className="InicioCameras">
+            <h4>BOA VIAGEM</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchBoaViagem"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>GUARARAPES</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchGuararapes"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>RUA DA AURORA</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchAurora"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>DERBY</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchDerby"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>AV. CONDE DA BOA VISTA</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchBoaVista"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>BR-101</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchBR101"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>PE-15</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchPE15"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>TORRE AURORA</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchTorreAurora"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+            <div className="InicioCameras">
+            <h4>CARUARU</h4>
+            <br></br>
+            <label class="switch">
+            <input type="checkbox" id="SwitchCaruaru"></input>
+            <span class="slider"></span>
+            </label> 
+            </div>
+          </div>
+
         </div>
         
         {/* Mapa */}
@@ -496,7 +632,7 @@ const DashboardPage = () => {
       </div>
       
       <div className="dashboard-footer">
-        <p>Sistema de Monitoramento de Tráfego - Versão 1.1 (Dados Reais)</p>
+        <p>Sistema de Monitoramento de Tráfego - Versão 1.1</p>
       </div>
     </div>
   );

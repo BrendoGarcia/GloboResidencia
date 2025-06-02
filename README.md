@@ -126,3 +126,39 @@ Este comando agrupará a aplicação na pasta `build/`.
 
 Esperamos que esta documentação ajude na execução e entendimento do projeto GloboWatch React Frontend!
 
+
+
+## Como rodar o Backend Analises Python
+Pré-requisitos
+Python 3 instalado no sistema
+
+pip instalado (gerenciador de pacotes Python)
+
+Passos para executar
+
+1.Instale as dependências diretamente
+
+```bash
+pip install -r dependencias.txt
+```
+2.Execute o projeto
+```bash
+python main.py
+```
+
+## Como rodar o Backend Geral API Python
+Pré-requisitos
+Python 3 instalado no sistema
+
+pip instalado (gerenciador de pacotes Python)
+
+Passos para executar
+
+1.Instale as dependências diretamente
+```bash
+pip install -r dependecias.txt
+```
+2.Execute o projeto
+```bash
+python backend.py
+```

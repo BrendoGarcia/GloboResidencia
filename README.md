@@ -121,7 +121,7 @@ Este comando agrupará a aplicação na pasta `build/`.
 
 -   **Design:** O design foi ajustado para priorizar a visualização e usabilidade em telas de desktop, garantindo que o conteúdo seja exibido de forma clara e sem necessidade de zoom.
 -   **Cores:** Foram utilizadas as cores institucionais do Grupo Globo.
--   **Backend:** Este projeto foca exclusivamente no frontend. As interações com o backend são simuladas ou preparadas para integração.
+-   **Backend:** Este projeto foca exclusivamente no frontend.
 -   **Reconhecimento de Voz:** Requer permissão do microfone e funciona melhor em navegadores modernos que suportam a Web Speech API (como Chrome).
 
 Esperamos que esta documentação ajude na execução e entendimento do projeto GloboWatch React Frontend!

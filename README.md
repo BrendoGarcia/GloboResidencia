@@ -136,6 +136,9 @@ pip instalado (gerenciador de pacotes Python)
 
 Passos para executar
 
+Atenção!!
+Dentro da Pasta GloboResidencia/BackEndAnalises
+
 1.Instale as dependências diretamente
 
 ```bash
@@ -149,6 +152,9 @@ python main.py
 ## Como rodar o Backend Geral API Python
 Pré-requisitos
 Python 3 instalado no sistema
+
+Atenção!!
+Dentro da Pasta GloboResidencia/BackEndAPIgeral
 
 pip instalado (gerenciador de pacotes Python)
 

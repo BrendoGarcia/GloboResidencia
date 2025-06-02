@@ -1,0 +1,8 @@
+opencv-python
+torch
+numpy
+pandas
+Pillow
+requests
+scipy
+seaborn

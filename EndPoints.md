@@ -26,6 +26,6 @@ http://localhost:5000/dashboard/dados?rua=TODAS&horas=6 "exibi os dados da de to
 Resposta:
 ```bash
 {
-Conjunto de dados vindo do banco Mondo Atlas.
+Conjunto de dados vindo do banco Mongo Atlas.
 }
 ```

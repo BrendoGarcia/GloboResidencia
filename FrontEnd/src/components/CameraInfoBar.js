@@ -21,7 +21,7 @@ const CameraInfoBar = ({ cameraName = 'Rua Aurora', cameraIp = '192.184.78.184' 
     useEffect(() => {
         const carregarDados = async () => {
             try {
-                const res = await fetch('http://localhost:5000/dados_trafego');
+                const res = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/dados_trafego`);
                 const dados = await res.json();
 
                 // Ordenar: alertas primeiro

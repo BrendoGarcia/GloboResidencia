@@ -6,6 +6,7 @@ import requests
 from datetime import datetime
 from scipy.spatial import distance as dist
 import threading
+import os
 import time
 
 app = Flask(__name__)
@@ -23,7 +24,7 @@ cameras = {
     "CAMERA9": "https://go2rtc-aplf.onrender.com/api/stream.mp4?src=camera9"
 }
 
-FLASK_API_URL = "http://localhost:5000/receber_dados"
+FLASK_API_URL = os.getenv("FLASK_API_URL", "http://localhost:5000/receber_dados")
 THRESHOLD_ACTIVE = 5
 
 # Controle de threads e status

@@ -145,7 +145,8 @@ const DashboardPage = () => {
 
     const ruaParam = ruaToCameraMapping[selectedRua] || 'TODAS';
     const horasParam = timeRangeToHoursMapping[selectedTimeRange] || 24;
-    const apiUrl = `http://localhost:5000/dashboard/dados?rua=${ruaParam}&horas=${horasParam}`;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = `${API_URL}/dashboard/dados?rua=${ruaParam}&horas=${horasParam}`;
 
     console.log(`Buscando dados de: ${apiUrl}`); // Log para debug
 

@@ -16,7 +16,9 @@ app = Flask(__name__)
 CORS(app)
 
 # === MongoDB Setup ===
-uri = "mongodb+srv://admin:admin123@conteinner.h5b7p.mongodb.net/?retryWrites=true&w=majority&appName=Conteinner"
+uri = os.getenv("MONGO_URI")
+if not uri:
+    raise RuntimeError("MONGO_URI não configurada")
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['GloboBanco']
 colecao = db['historico_alertas']
@@ -140,4 +142,4 @@ def obter_dados_dashboard():
 
 if __name__ == '__main__':
 #    limpar_historico()  # inicia o agendador ao subir o servidor
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', '5000')), debug=False)
